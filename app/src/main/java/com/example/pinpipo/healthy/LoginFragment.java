@@ -33,12 +33,12 @@ public class LoginFragment extends Fragment {
     @Override
     public void onActivityCreated (@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        final FirebaseAuth mAuth = FirebaseAuth.getInstance(); //เราเรียกใช้ firebase ที่เรียกในการ login หรือ register
-        final FirebaseUser mUser = mAuth.getCurrentUser(); //คือเมื่อ login ไว้แล้วแล้วจำหน้าไว้
+//        final FirebaseAuth mAuth = FirebaseAuth.getInstance(); //เราเรียกใช้ firebase ที่เรียกในการ login หรือ register
+//        final FirebaseUser mUser = mAuth.getCurrentUser(); //คือเมื่อ login ไว้แล้วแล้วจำหน้าไว้
 
-        if (mUser != null){
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
-        }
+//        if (mUser != null){
+//            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
+//        }
 
 
         Button LoginButton = getView().findViewById(R.id.LoginButton);
@@ -55,49 +55,50 @@ public class LoginFragment extends Fragment {
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText _userId = (EditText) getView().findViewById(R.id.LoginId);
-                EditText _password = (EditText) getView().findViewById(R.id.LoginPassword);
+                EditText userId = (EditText) getView().findViewById(R.id.LoginId);
+                EditText password = (EditText) getView().findViewById(R.id.LoginPassword);
 
-                String _userIdStr = _userId.getText().toString();
-                String _passwordStr = _password.getText().toString();
+                String userIdStr = userId.getText().toString();
+                String passwordStr = password.getText().toString();
+//
+//                mAuth.signInWithEmailAndPassword(userIdStr, passwordStr).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//                    @Override
+//
+//                    public void onSuccess(AuthResult authResult) {
+//                        if (mUser.isEmailVerified() == true){
+//                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
+//                            Log.d("USER","GOTO BMI");
+//                        }else{
+//                            Toast.makeText(
+//                                    getActivity(),"คุณยังไม่ได้ทำการยืนยัน email",
+//                                    Toast.LENGTH_SHORT
+//                            ).show();
+//                        }
+//
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(
+//                                getActivity(), e.getMessage(),//แม่ง show ข้อความให้เลย
+//                                Toast.LENGTH_SHORT
+//                        ).show();
+//
+//                    }
+//                });
 
-                mAuth.signInWithEmailAndPassword(_userIdStr, _passwordStr).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        if (mUser.isEmailVerified() == true){
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
-                            Log.d("USER","GOTO BMI");
-                        }else{
-                            Toast.makeText(
-                                    getActivity(),"คุณยังไม่ได้ทำการยืนยัน email",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-                        }
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(
-                                getActivity(), e.getMessage(),//แม่ง show ข้อความให้เลย
-                                Toast.LENGTH_SHORT
-                        ).show();
-
-                    }
-                });
-
-//                if (_userIdStr.isEmpty() || _passwordStr.isEmpty()){
-//                    Toast.makeText(
-//                            getActivity(),"กรุณาระบุ user or password",
-//                            Toast.LENGTH_SHORT
-//                    ).show();
-//                    Log.d("USER","USER OR PASSWORD IS EMPTY");
-//                } else if (_userIdStr.equals("admin") && _passwordStr.equals("admin")){
-//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
-//                    Log.d("USER","GOTO BMI");
-//                } else {
-//                    Log.d("USER", "INVALID USER NAME OR PASSWORD");
-//                }
+                if (userIdStr.isEmpty() || passwordStr.isEmpty()){
+                    Toast.makeText(
+                            getActivity(),"กรุณาระบุ user or password",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    Log.d("USER","USER OR PASSWORD IS EMPTY");
+                } else if (userIdStr.equals("admin") && passwordStr.equals("admin")){
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
+                    Log.d("USER","GOTO BMI");
+                } else {
+                    Log.d("USER", "INVALID USER NAME OR PASSWORD");
+                }
             }
         });
 
