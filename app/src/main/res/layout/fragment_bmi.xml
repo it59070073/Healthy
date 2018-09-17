@@ -12,7 +12,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/BMI"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -23,7 +23,7 @@
 
 
             <EditText
-                android:id="@+id/height"
+                android:id="@+id/BmiHeight"
                 android:drawableLeft="@drawable/ic_action_height"
                 android:inputType="text"
                 android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                 android:layout_marginRight="40dp"/>
 
             <EditText
-                android:id="@+id/weight"
+                android:id="@+id/BmiWeight"
                 android:drawableLeft="@drawable/ic_action_weight"
                 android:inputType="text"
                 android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                 android:layout_marginRight="40dp"/>
 
             <Button
-                android:id="@+id/bmi_btn"
+                android:id="@+id/BmiButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="CALCULATE"
@@ -51,12 +51,12 @@
                 android:layout_marginRight="40dp"/>
 
             <TextView
+                android:id="@+id/BmiResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="40dp"
-                android:id="@+id/text"
                 android:padding="15dp"
                 android:textSize="25dp" />
 

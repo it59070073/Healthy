@@ -12,7 +12,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/Weight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -21,14 +21,6 @@
                 android:text="Weight"
                 android:textSize="25dp" />
 
-
-            <Button
-                android:id="@+id/add_weight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Weight"/>
-                //android:layout_marginLeft="40dp"
-                //android:layout_marginRight="40dp"/>
 
 
             <ListView

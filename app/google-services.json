@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "383037807202",
+    "firebase_url": "https://healthykmitl073.firebaseio.com",
+    "project_id": "healthykmitl073",
+    "storage_bucket": "healthykmitl073.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383037807202:android:0775f66962d044c2",
+        "android_client_info": {
+          "package_name": "com.example.pinpipo.healthy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383037807202-575v40r4ld15357o4gm1stcdio739hno.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pinpipo.healthy",
+            "certificate_hash": "ed421a2626aaeb7fa071530c70c03caf463357b2"
+          }
+        },
+        {
+          "client_id": "383037807202-hgdcti8j58s4lv8ql5gtdf72dbn02t0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx0wdZQ2L-jb6zxtZTLP-BxcG9FMCWlXk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383037807202-hgdcti8j58s4lv8ql5gtdf72dbn02t0c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

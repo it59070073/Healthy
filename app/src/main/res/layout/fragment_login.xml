@@ -25,7 +25,7 @@
                 />
 
             <EditText
-                android:id="@+id/login_user_id"
+                android:id="@+id/LoginId"
                 android:drawableLeft="@drawable/ic_action_user"
                 android:inputType="text"
                 android:layout_width="match_parent"
@@ -36,7 +36,7 @@
 
 
             <EditText
-                android:id="@+id/login_password"
+                android:id="@+id/LoginPassword"
                 android:drawableLeft="@drawable/ic_action_password"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                 android:layout_marginRight="40dp"/>
 
             <Button
-                android:id="@+id/login_login_btn"
+                android:id="@+id/LoginButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="LOGIN"
@@ -54,7 +54,7 @@
                 android:layout_marginRight="40dp"/>
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/LoginRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Register New Account"

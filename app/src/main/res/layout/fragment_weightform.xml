@@ -12,7 +12,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/Setup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -23,7 +23,7 @@
 
 
             <Button
-                android:id="@+id/back"
+                android:id="@+id/WeightFormBack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Back"/>
@@ -32,7 +32,8 @@
 
 
             <EditText
-                android:id="@+id/height"
+                android:id="@+id/WeightFormDate"
+                android:drawableLeft="@drawable/ic_action_date"
                 android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,7 +42,8 @@
                 android:layout_marginRight="40dp"/>
 
             <EditText
-                android:id="@+id/weight"
+                android:id="@+id/WeightFormWeight"
+                android:drawableLeft="@drawable/ic_action_weight"
                 android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,7 +52,7 @@
                 android:layout_marginRight="40dp"/>
 
             <Button
-                android:id="@+id/save"
+                android:id="@+id/WeightFormSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Save"/>
