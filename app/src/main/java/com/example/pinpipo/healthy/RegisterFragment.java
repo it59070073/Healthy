@@ -31,95 +31,58 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        Button RegisterButton = getView().findViewById(R.id.RegisterButton);
-        RegisterButton.setOnClickListener(new View.OnClickListener() {
+
+        Button registerBtn = (Button) getActivity().findViewById(R.id.RegisterButton);
+        registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText email = (EditText) getView().findViewById(R.id.RegisterEmail);
-                String emailStr = email.getText().toString();
+                String email = ((EditText) getView().findViewById(R.id.RegisterEmail)).getText().toString();
+                String password = ((EditText) getView().findViewById(R.id.RegisterPassword)).getText().toString();
+                String repassword = ((EditText) getView().findViewById(R.id.RegisterRe_password)).getText().toString();
 
-                EditText password = (EditText) getView().findViewById(R.id.RegisterPassword);
-                String passwordStr = password.getText().toString();
-
-                EditText rePassword = (EditText) getView().findViewById(R.id.RegisterRe_password);
-                String rePasswordStr = rePassword.getText().toString();
-
-
-//                EditText username = (EditText) getView().findViewById(R.id.username);
-//                String usernameStr = username.getText().toString();
-//
-//                EditText name = (EditText) getView().findViewById(R.id.name);
-//                String nameStr = name.getText().toString();
-//
-//                EditText age = (EditText) getView().findViewById(R.id.age);
-//                String ageStr = age.getText().toString();
-
-//                EditText password = (EditText) getView().findViewById(R.id.password);
-//                String passwordStr = password.getText().toString();
-
-//                if (usernameStr.isEmpty() || nameStr.isEmpty() || ageStr.isEmpty() || passwordStr.isEmpty()){
-//                    Toast.makeText(
-//                            getActivity(),"กรุณาระบุข้อมูลให้ครบถ้วน",
-//                            Toast.LENGTH_SHORT
-//                    ).show();
-//                    Log.d("REGISTER","FIELD NAME IS EMPTY");
-//                }else if (usernameStr.equals("admin")){
-//                    Toast.makeText(
-//                            getActivity(),"user นี้มีอยู่ในระบบแล้ว",
-//                            Toast.LENGTH_SHORT
-//                    ).show();
-//                    Log.d("REGISTER","USER ALREADY EXIST");
-//                }else{
-//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BmiFragment()).commit();
-//                    Log.d("REGISTER","GOTO BMI");
-//
-//                }
-
-                if (emailStr.isEmpty() || passwordStr.isEmpty() || rePasswordStr.isEmpty()){
-                    Toast.makeText(
-                            getActivity(),"กรุณาระบุข้อมูลให้ครบถ้วน",
-                            Toast.LENGTH_SHORT
-                    ).show();
+                if (email.isEmpty() || password.isEmpty() || repassword.isEmpty()) {
                     Log.d("REGISTER", "FIELD NAME IS EMPTY");
-                } else if (passwordStr.length() < 6  || (passwordStr.equals(rePasswordStr) == false)){
-                    Toast.makeText(
-                            getActivity(),"กรุณากรอกรหัสใหม่",
-                            Toast.LENGTH_SHORT
-                    ).show();
-                    Log.d("REGISTER", "PASSWORD ไม่ดี");
-                }else {
-                    mAuth.createUserWithEmailAndPassword(emailStr, passwordStr).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show();
+                } else if (password.length() < 6) {
+                    Log.d("REGISTER", "Password not secure");
+                    Toast.makeText(getActivity(), "Password ของคุณมีความปลอดภัยต่ำ", Toast.LENGTH_SHORT).show();
+                } else if (password.equals(repassword) == false) {
+                    Log.d("REGISTER", "Password and Re password not match");
+                    Toast.makeText(getActivity(), "กรุณากรอก password และ re-password ให้ตรงกัน", Toast.LENGTH_SHORT).show();
+                } else {
+                    mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            sendVerifiedEmail(authResult.getUser());
+                            FirebaseUser _user = authResult.getUser();
+                            sendVerifiedEmail(_user);
+                            mAuth.signOut();
+                            Log.d("REGISTER", "GOTO BMI");
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).commit();
-                            Log.d("REGISTER","GOTO BMI");
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getActivity(), "ERROR" + e.getMessage(), Toast.LENGTH_SHORT);
-
+                            Log.d("REGISTER", e.getMessage());
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-
                 }
-
-
             }
         });
-
-
     }
 
-    private void sendVerifiedEmail(FirebaseUser user){
-        user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+    void sendVerifiedEmail(FirebaseUser _user) {
+        _user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getContext(),"", Toast.LENGTH_SHORT);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
             }
         });
     }

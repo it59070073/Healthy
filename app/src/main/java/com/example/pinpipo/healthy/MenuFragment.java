@@ -65,14 +65,13 @@ public class MenuFragment extends Fragment {
                             .addToBackStack(null)
                             .commit();
 
-                }else if (menu.get(i).equals("Logout")){
+                }else {
+                    Log.d("MENU", "Logout");
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
                     mAuth.signOut(); //ป้องกันไม่ให้เกิด loop
-
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_view, new LoginFragment())
-                            .addToBackStack(null)
                             .commit();
 
                 }

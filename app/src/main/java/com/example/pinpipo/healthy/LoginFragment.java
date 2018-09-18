@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginFragment extends Fragment {
-
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Nullable
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater,
@@ -33,75 +33,56 @@ public class LoginFragment extends Fragment {
     @Override
     public void onActivityCreated (@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-//        final FirebaseAuth mAuth = FirebaseAuth.getInstance(); //เราเรียกใช้ firebase ที่เรียกในการ login หรือ register
-//        final FirebaseUser mUser = mAuth.getCurrentUser(); //คือเมื่อ login ไว้แล้วแล้วจำหน้าไว้
-
-//        if (mUser != null){
-//            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
-//        }
-
-
-        Button LoginButton = getView().findViewById(R.id.LoginButton);
-        TextView RegisterTV = getView().findViewById(R.id.LoginRegister);
-
-        RegisterTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("USER", "GOTO REGISTER");
+        TextView regisTv = (TextView) getView().findViewById(R.id.LoginRegister);
+        regisTv.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view){
+                Log.d("LOGIN", "GOTO REGISTER");
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new RegisterFragment()).commit();
             }
         });
 
-        LoginButton.setOnClickListener(new View.OnClickListener() {
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser muUser = mAuth.getCurrentUser();
+
+        if(muUser != null){
+            Log.d("LOGIN", muUser.getEmail());
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
+            Log.d("LOGIN", "GO TO BMI");
+        }
+
+        Button loginBtn = (Button) getView().findViewById(R.id.LoginButton);
+        loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                EditText userId = (EditText) getView().findViewById(R.id.LoginId);
-                EditText password = (EditText) getView().findViewById(R.id.LoginPassword);
 
-                String userIdStr = userId.getText().toString();
-                String passwordStr = password.getText().toString();
-//
-//                mAuth.signInWithEmailAndPassword(userIdStr, passwordStr).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//                    @Override
-//
-//                    public void onSuccess(AuthResult authResult) {
-//                        if (mUser.isEmailVerified() == true){
-//                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
-//                            Log.d("USER","GOTO BMI");
-//                        }else{
-//                            Toast.makeText(
-//                                    getActivity(),"คุณยังไม่ได้ทำการยืนยัน email",
-//                                    Toast.LENGTH_SHORT
-//                            ).show();
-//                        }
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(
-//                                getActivity(), e.getMessage(),//แม่ง show ข้อความให้เลย
-//                                Toast.LENGTH_SHORT
-//                        ).show();
-//
-//                    }
-//                });
-
-                if (userIdStr.isEmpty() || passwordStr.isEmpty()){
-                    Toast.makeText(
-                            getActivity(),"กรุณาระบุ user or password",
-                            Toast.LENGTH_SHORT
-                    ).show();
-                    Log.d("USER","USER OR PASSWORD IS EMPTY");
-                } else if (userIdStr.equals("admin") && passwordStr.equals("admin")){
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
-                    Log.d("USER","GOTO BMI");
+                String email = ((EditText) getView().findViewById(R.id.LoginId)).getText().toString();
+                String password = ((EditText) getView().findViewById(R.id.LoginPassword)).getText().toString();
+                if (email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.d("USER", "INVALID USER NAME OR PASSWORD");
+                    mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            FirebaseUser _user = authResult.getUser();
+                            if (!_user.isEmailVerified()) {
+                                Toast.makeText(getActivity(), "กรุณายืนยัน Email", Toast.LENGTH_SHORT).show();
+                            } else {
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
+                                Log.d("LOGIN", "GO TO BMI");
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("LOGIN", e.getMessage());
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }
             }
         });
-
-    } //hello
+    }
 
 }

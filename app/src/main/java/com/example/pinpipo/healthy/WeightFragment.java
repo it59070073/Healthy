@@ -12,6 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 
 public class WeightFragment extends Fragment {
@@ -33,31 +40,15 @@ public class WeightFragment extends Fragment {
 
     public void onActivityCreated (@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        Button addWeight = getView().findViewById(R.id.WeightFormSave);
-        ListView weightList = getView().findViewById(R.id.weight_list);
-
-        WeightAdapter menuAdapter = new WeightAdapter(
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        final ListView weightList = (ListView) getView().findViewById(R.id.weight_list);
+        final WeightAdapter weightAdapter = new WeightAdapter(
                 getActivity(),
                 R.layout.fragment_weight_item,
                 weight
         );
-        weight.add(new Weight("1 Jan 2018", 60, "Up"));
-        weightList.setAdapter(menuAdapter);
-
-
-
-        addWeight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("WEIGHT", "ADD WEIGHT");
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.main_view, new WeightFormFragment())
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-
+        weightList.setAdapter(weightAdapter);
     }
 
 
