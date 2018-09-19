@@ -21,13 +21,16 @@
                 android:text="Weight"
                 android:textSize="25dp" />
 
-
+            <Button
+                android:id="@+id/WeightAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add"/>
 
             <ListView
                 android:id="@+id/weight_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </ListView>
+                android:layout_height="453dp"></ListView>
 
 
         </LinearLayout>

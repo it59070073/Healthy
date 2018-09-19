@@ -39,47 +39,64 @@ public class WeightFormFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         onClickBtn();
+        back();
     }
 
     public void onClickBtn() {
         Button submit = getView().findViewById(R.id.WeightFormSave);
-        final EditText weightFormDate = getView().findViewById(R.id.WeightFormDate);
-        EditText weightFormWeight = getView().findViewById(R.id.WeightFormWeight);
-
-        final String weightFormDateStr = weightFormDate.getText().toString();
-        final String weightFormWeightStr = weightFormWeight.getText().toString();
-
-        final String uid = firebaseAuth.getCurrentUser().getUid();
-
-        final Weight weight = new Weight(weightFormDateStr, weightFormWeightStr);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (weightFormDateStr.isEmpty() || weightFormWeightStr.isEmpty()) {
-                    Log.d("WeightForm","กรุณากรอกให้ครบ");
-                    Toast.makeText(getActivity(), "กรุณากรอกให้ครบ", Toast.LENGTH_SHORT).show();
-                } else {
-                      firebaseFirestore
-                              .collection("myfitness")
-                              .document(uid)
-                              .collection("weight")
-                              .document(weightFormDateStr)
-                              .set(weight)
-                              .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                  @Override
-                                  public void onSuccess(Void aVoid) {
-                                      Log.d("WeightForm","ข้อมูลเข้าเรียบร้อย");
-                                      Toast.makeText(getActivity(), "Done", Toast.LENGTH_SHORT).show();
-                                  }
-                              }).addOnFailureListener(new OnFailureListener() {
-                                  @Override
-                                  public void onFailure(@NonNull Exception e) {
-                                      Log.d("WeightForm", "fail");
-                                      Toast.makeText(getActivity(), "Fail", Toast.LENGTH_SHORT).show();
-                                  }
-                      });
+                EditText weightFormDate = getView().findViewById(R.id.WeightFormDate);
+                EditText weightFormWeight = getView().findViewById(R.id.WeightFormWeight);
+
+                String weightFormDateStr = weightFormDate.getText().toString();
+                String weightFormWeightStr = weightFormWeight.getText().toString();
+
+                String uid = firebaseAuth.getCurrentUser().getUid();
+
+                Weight weight = new Weight(weightFormDateStr, weightFormWeightStr);
+
+                if (weightFormDateStr.isEmpty() || weightFormWeightStr.isEmpty()){
+                    Log.d("WeightForm","fail");
+                    Toast.makeText(getActivity(),"กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT).show();
+                }else{
+                    firebaseFirestore
+                            .collection("myfitness")
+                            .document(uid)
+                            .collection("weight")
+                            .document(weightFormDateStr)
+                            .set(weight)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("WeightForm","done");
+                                    Toast.makeText(getActivity(),"done", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("WeightForm","fail");
+                            Toast.makeText(getActivity(),"fail", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
+            }
+        });
+    }
+
+    public void back(){
+        Button back = getView().findViewById(R.id.WeightFormBack);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_view, new MenuFragment())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }
