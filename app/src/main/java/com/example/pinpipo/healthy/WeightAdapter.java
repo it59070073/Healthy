@@ -42,8 +42,7 @@ public class WeightAdapter extends ArrayAdapter<Weight> {
         Weight row = weights.get(position);//set ของข้อความ
 
         date.setText(row.getDate());
-        weight.setText(row.getWeight().toString());
-        status.setText(row.getStatus());
+        weight.setText(row.getWeight());
 
         return weightItem; //ไม่มี void เลยต้อง return
 

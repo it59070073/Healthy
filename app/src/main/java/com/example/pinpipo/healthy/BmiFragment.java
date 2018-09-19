@@ -26,8 +26,9 @@ public class BmiFragment extends Fragment{
     @Override
     public void onActivityCreated (@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        Button bmiBtn = getView().findViewById(R.id.BmiButton);
 
+
+        Button bmiBtn = getView().findViewById(R.id.BmiButton);
 
         bmiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +41,8 @@ public class BmiFragment extends Fragment{
 
                 if (heightInt.isEmpty() || weightInt.isEmpty()){
                     Toast.makeText(
-                            getActivity(),"กรุณาระบุข้อมูลให้ครบถ้วน",
+                            getActivity(),
+                            "กรุณาระบุข้อมูลให้ครบถ้วน",
                             Toast.LENGTH_SHORT
                     ).show();
                     Log.d("BMI","FIELD NAME IS EMPTY");
@@ -50,8 +52,7 @@ public class BmiFragment extends Fragment{
                     Float weightF = Float.parseFloat(weightInt);
                     Float text = weightF/(heightF*heightF);
 
-                    ((TextView) getView().findViewById(R.id.text)).setText(String.valueOf(text));
-
+                    ((TextView) getView().findViewById(R.id.BmiResult)).setText(String.valueOf(text));
 
                 }
 
