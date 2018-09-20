@@ -59,7 +59,11 @@ public class RegisterFragment extends Fragment {
                             sendVerifiedEmail(_user);
                             mAuth.signOut();
                             Log.d("REGISTER", "GOTO BMI");
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).commit();
+                            getActivity().getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.main_view, new LoginFragment())
+                                    .addToBackStack(null)
+                                    .commit();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

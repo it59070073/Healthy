@@ -68,7 +68,12 @@ public class LoginFragment extends Fragment {
                             if (!_user.isEmailVerified()) {
                                 Toast.makeText(getActivity(), "กรุณายืนยัน Email", Toast.LENGTH_SHORT).show();
                             } else {
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
+                                getActivity()
+                                        .getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.main_view, new MenuFragment())
+                                        .addToBackStack(null)
+                                        .commit();
                                 Log.d("LOGIN", "GO TO BMI");
                             }
                         }
