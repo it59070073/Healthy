@@ -30,7 +30,7 @@
             <ListView
                 android:id="@+id/weight_list"
                 android:layout_width="match_parent"
-                android:layout_height="453dp"></ListView>
+                android:layout_height="455dp"></ListView>
 
 
         </LinearLayout>

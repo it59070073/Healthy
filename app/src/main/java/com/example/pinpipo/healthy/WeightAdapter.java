@@ -29,9 +29,13 @@ public class WeightAdapter extends ArrayAdapter<Weight> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position,
+                        @Nullable View convertView,
+                        @NonNull ViewGroup parent) {
+
+
         View weightItem = LayoutInflater.from(context)
-                .inflate(R.layout.fragment_weight_item,
+                        .inflate(R.layout.fragment_weight_item,
                         parent,
                         false);
 
@@ -39,10 +43,25 @@ public class WeightAdapter extends ArrayAdapter<Weight> {
         TextView weight = weightItem.findViewById(R.id.weight);
         TextView status = weightItem.findViewById(R.id.status);
 
-        Weight row = weights.get(position);//set ของข้อความ
+        Weight row = weights.get(position);  //set ของข้อความ
 
         date.setText(row.getDate());
         weight.setText(row.getWeight());
+
+        if (position == weights.size() - 1){
+            status.setText("");
+        }else {
+            Double first = Double.parseDouble(weights.get(position).getWeight());
+            Double second = Double.parseDouble(weights.get(position + 1).getWeight());
+
+            if (first > second){
+                status.setText("UP");
+            }else if (second > first){
+                status.setText("DOWN");
+            }else {
+                status.setText("");
+            }
+        }
 
         return weightItem; //ไม่มี void เลยต้อง return
 

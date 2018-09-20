@@ -73,6 +73,13 @@ public class WeightFormFragment extends Fragment {
                                 public void onSuccess(Void aVoid) {
                                     Log.d("WeightForm","done");
                                     Toast.makeText(getActivity(),"done", Toast.LENGTH_SHORT).show();
+
+                                    getActivity().getSupportFragmentManager()
+                                            .beginTransaction()
+                                            .replace(R.id.main_view, new WeightFragment())
+                                            .addToBackStack(null)
+                                            .commit();
+
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override

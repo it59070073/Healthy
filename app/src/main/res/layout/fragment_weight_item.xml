@@ -20,7 +20,8 @@
                 android:layout_height="wrap_content"
                 android:text="1 jan 2018"
                 android:textSize="16dp"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:id="@+id/weight"
@@ -36,7 +37,8 @@
                 android:layout_height="match_parent"
                 android:gravity="right"
                 android:text="UP"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
     </ScrollView>
 
