@@ -12,7 +12,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/Setup"
+                android:id="@+id/Sleep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -23,7 +23,7 @@
 
 
             <Button
-                android:id="@+id/WeightFormBack"
+                android:id="@+id/sleepFormBack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Back"/>

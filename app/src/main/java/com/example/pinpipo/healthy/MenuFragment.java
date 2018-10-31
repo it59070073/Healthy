@@ -12,6 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.pinpipo.healthy.sleep.SleepFragment;
+import com.example.pinpipo.healthy.weight.WeightFormFragment;
+import com.example.pinpipo.healthy.weight.WeightFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;

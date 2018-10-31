@@ -1,4 +1,4 @@
-package com.example.pinpipo.healthy;
+package com.example.pinpipo.healthy.sleep;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,30 +8,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class SleepFragment extends Fragment {
+import com.example.pinpipo.healthy.R;
+
+public class SleepFormFragment extends Fragment{
+
     public View onCreateView (@Nullable LayoutInflater inflater,
                               @Nullable ViewGroup container,
                               @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_sleep, container, false);
+        return inflater.inflate(R.layout.fragment_sleepform, container, false);
     }
 
     public void onActivityCreated (@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        addWeight();
+        save();
+        back();
     }
 
-    public void addWeight(){
-        Button add = getView().findViewById(R.id.sleepAdd);
+    public void save(){
 
-        add.setOnClickListener(new View.OnClickListener() {
+    }
+
+    public void back(){
+        Button back = getView().findViewById(R.id.sleepFormBack);
+
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.main_view, new SleepFormFragment())
+                        .replace(R.id.main_view, new SleepFragment())
                         .addToBackStack(null)
                         .commit();
             }
         });
     }
+
+
+
 }

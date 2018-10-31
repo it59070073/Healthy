@@ -1,4 +1,4 @@
-package com.example.pinpipo.healthy;
+package com.example.pinpipo.healthy.weight;
 
 public class Weight {
     private String date;

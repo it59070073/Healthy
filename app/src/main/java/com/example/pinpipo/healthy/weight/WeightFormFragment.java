@@ -1,4 +1,4 @@
-package com.example.pinpipo.healthy;
+package com.example.pinpipo.healthy.weight;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pinpipo.healthy.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -101,7 +102,7 @@ public class WeightFormFragment extends Fragment {
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.main_view, new MenuFragment())
+                        .replace(R.id.main_view, new WeightFragment())
                         .addToBackStack(null)
                         .commit();
             }
