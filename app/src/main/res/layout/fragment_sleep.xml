@@ -22,10 +22,17 @@
                 android:textSize="25dp" />
 
             <Button
+                android:id="@+id/sleepฺBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back"/>
+
+            <Button
                 android:id="@+id/sleepAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add"/>
+
 
             <ListView
                 android:id="@+id/sleep_list"
