@@ -15,16 +15,22 @@ import android.widget.Toast;
 
 import com.example.pinpipo.healthy.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class SleepFormFragment extends Fragment{
 
-    private List<Sleep> sleeplist;
     private SQLiteDatabase database;
     private CalculateHour calculateHour;
     private ContentValues preInsert;
+
+    public SleepFormFragment() {
+        preInsert = new ContentValues();
+        calculateHour = new CalculateHour();
+
+    }
 
     public View onCreateView (@Nullable LayoutInflater inflater,
                               @Nullable ViewGroup container,
@@ -54,7 +60,6 @@ public class SleepFormFragment extends Fragment{
     }
 
     public void save(){
-
         database = getActivity().openOrCreateDatabase("my.db", MODE_PRIVATE, null); //ต่อ database
 
         Button save = getView().findViewById(R.id.sleepFormSave);
@@ -69,8 +74,7 @@ public class SleepFormFragment extends Fragment{
                 String date = sleepFormDate.getText().toString();
                 String sleepTime = sleepFormSleepTime.getText().toString();
                 String wakeTime = sleepFormWakeTime.getText().toString();
-                String hour = sleepFormDate.getText().toString();
-                String _duration = calculateHour.calculate(sleepTime, wakeTime);
+                String hour = calculateHour.calculate(sleepTime, wakeTime);
 
                 preInsert.clear();
 

@@ -21,9 +21,7 @@ import java.util.List;
 public class SleepFragment extends Fragment {
 
     private static final String SQL_LISTALL_SLEEP = "SELECT * FROM sleep";
-    private SQLiteDatabase database;
     private Cursor query;
-
     private List<Sleep> sleepList;
     private SleepAdapter sleepAdapter;
     private ListView listView;
@@ -83,7 +81,7 @@ public class SleepFragment extends Fragment {
 
         String text;
 
-        database = getActivity().openOrCreateDatabase("my.db", Context.MODE_PRIVATE, null);
+        SQLiteDatabase database = getActivity().openOrCreateDatabase("my.db", Context.MODE_PRIVATE, null);
 
         sleepAdapter = new SleepAdapter(
                 getActivity(),
