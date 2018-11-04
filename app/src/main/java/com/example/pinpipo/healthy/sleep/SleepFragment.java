@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -26,8 +27,12 @@ public class SleepFragment extends Fragment {
     private SleepAdapter sleepAdapter;
     private ListView listView;
 
+    private Bundle bundle;
+
+
     public SleepFragment() {
         sleepList = new ArrayList<>();
+        bundle = new Bundle();
     }
 
     public View onCreateView (@Nullable LayoutInflater inflater,
@@ -112,5 +117,28 @@ public class SleepFragment extends Fragment {
         database.close();
         sleepAdapter.notifyDataSetChanged();
 
+        onClickListView(listView); //เวลากดเข้า list
+
+    }
+
+    private void onClickListView(ListView listView) {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Sleep sleep = (Sleep) parent.getItemAtPosition(position);
+
+                bundle.putString("date", sleep.getDate());
+
+                SleepFormFragment sleepFormFragment = new SleepFormFragment();
+                sleepFormFragment.setArguments(bundle);
+
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_view, sleepFormFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 }
