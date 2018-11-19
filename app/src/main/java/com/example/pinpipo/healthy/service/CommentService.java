@@ -1,5 +1,7 @@
 package com.example.pinpipo.healthy.service;
 
+import com.example.pinpipo.healthy.post.Comment;
+
 import java.util.List;
 
 import retrofit2.Call;
